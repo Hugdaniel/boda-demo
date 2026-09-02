@@ -1,0 +1,182 @@
+/* ==========================================
+   RESET Y REGLAS GENERALES
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ffffff;
+  color: #333333;
+  overflow-x: hidden;
+}
+
+/* ==========================================
+   LOADER Y FONDO AZUL NOCHE
+   ========================================== */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0B132B; /* Azul Noche */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+/* Caja contenedora para el SVG y el texto */
+.loader-box {
+  position: relative;
+  width: 88%;
+  max-width: 420px;
+  height: 75vh;
+  max-height: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* SVG que actúa como el borde dibujado */
+.border-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Evita que el SVG bloquee los clics en el botón */
+}
+
+/* Estilo del rectángulo SVG */
+.border-rect {
+  fill: transparent; /* Fondo transparente dentro del marco */
+  stroke: #7611d4;   /* Color del borde púrpura/violeta */
+  stroke-width: 1.2; /* Grosor de la línea */
+  
+  /* LÓGICA DE DIBUJO: simulamos una línea continua de 2000px */
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  
+  /* Ejecuta la animación de dibujado durante 2.5 segundos */
+  animation: drawBorder 2.9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Animación CSS que reduce el offset a 0 para revelar la línea entera */
+@keyframes drawBorder {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Contenido dentro del marco */
+.loader-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  
+  /* Aparece suavemente con un leve retraso mientras se dibuja el marco */
+  opacity: 0;
+  animation: fadeInContent 1.2s ease 0.8s forwards;
+}
+
+@keyframes fadeInContent {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ==========================================
+   NUEVO ESTILO PARA EL MONOGRAMA EN IMAGEN
+   ========================================== */
+
+/* Contenedor del monograma */
+.monogram-container {
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo de la imagen del monograma */
+.monogram-img {
+  width: 140px;          /* Ajustá este valor según el alto/ancho de tu diseño */
+  height: auto;          /* Mantiene la proporción original sin deformar */
+  max-width: 80%;        /* Evita que se salga en pantallas chicas */
+  filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.4)); /* Resplandor púrpura tenue */
+}
+
+/* Frase debajo del monograma */
+.loader-phrase {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: #CBD5E1;
+  letter-spacing: 3px;
+  margin-bottom: 35px;
+  text-transform: uppercase;
+}
+
+/* ==========================================
+   BOTÓN Y TRANSICIÓN
+   ========================================== */
+.btn-reveal {
+  background-color: rgba(126, 34, 206, 0.15);
+  border: 1px solid #5f12a7;
+  color: #ffffff;
+  padding: 12px 26px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-reveal:hover {
+  background-color: #7E22CE;
+  border-color: #7E22CE;
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.6);
+  transform: translateY(-2px);
+}
+
+.loader-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* PANTALLA PRINCIPAL (HERO) */
+.hero-placeholder {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  color: #7E22CE;
+}
+
+.hero-subtitle {
+  margin-top: 10px;
+  color: #666666;
+  letter-spacing: 1px;
+}

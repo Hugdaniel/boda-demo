@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Javier & Erica — Invitación de Boda</title>
+
+  <!-- Fuentes elegantes desde Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LOADER CON MARCO ANIMADO -->
+  <div id="loader">
+    
+    <!-- Marco contenedor principal -->
+    <div class="loader-box">
+      
+      <!-- SVG que dibuja el borde púrpura -->
+      <svg class="border-svg" width="100%" height="100%">
+        <!-- El rectángulo ocupa todo el espacio del contenedor -->
+        <rect class="border-rect" x="0" y="0" width="100%" height="100%" rx="16" ry="16" />
+      </svg>
+
+      <!-- Contenido dentro del marco -->
+      <div class="loader-content">
+        
+       <!-- En el index.html, dentro de div.loader-content -->
+
+<!-- Reemplazamos las letras por tu imagen de monograma -->
+<div class="monogram-container">
+  <img src="assets/monograma.png" alt="Monograma Javier y Erica" class="monogram-img">
+</div>
+
+<p class="loader-phrase">Tenemos algo que contarte...</p>
+
+      
+
+        <button id="btn-revelar" class="btn-reveal">
+          <span>Ver Invitación</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PANTALLA PRINCIPAL (HERO) -->
+  <main class="hero-placeholder">
+    <h1 class="hero-title">Javier & Erica</h1>
+    <p class="hero-subtitle">¡Bienvenidos a nuestra boda!</p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
