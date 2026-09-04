@@ -8,10 +8,26 @@
 }
 
 body {
+  position: relative;
   font-family: 'Montserrat', sans-serif;
   background-color: #ffffff;
   color: #333333;
   overflow-x: hidden;
+  background: url(assets/textura-papel.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Contorno púrpura integrado visualmente con la textura */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 18px;
+  border: 5px solid #6809c2;
+  mix-blend-mode: overlay; /* Mezcla el borde con la textura de fondo */
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* ==========================================
@@ -56,7 +72,7 @@ body {
 /* Estilo del rectángulo SVG */
 .border-rect {
   fill: transparent; /* Fondo transparente dentro del marco */
-  stroke: #7611d4;   /* Color del borde púrpura/violeta */
+  stroke: #6809c2;   /* Color del borde púrpura/violeta */
   stroke-width: 1.2; /* Grosor de la línea */
   
   /* LÓGICA DE DIBUJO: simulamos una línea continua de 2000px */
@@ -250,5 +266,118 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .btn-reveal {
     animation: none;
+  }
+}
+
+/* ==========================================
+   HERO CON DISPOSICIÓN LATERAL (TITULO EN EL MEDIO)
+   ========================================== */
+.hero-section {
+  position: relative;
+  min-height: 120vh;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-container {
+  width: 100%;
+  max-width: 1000px; /* Ancho cómodo para pantallas de celular y desktop */
+  padding: 0 15px;
+}
+
+/* Grilla / Fila Principal */
+.hero-layout-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  min-height: 450px;
+}
+
+/* Bloque Central del Título */
+.hero-text {
+  text-align: center;
+  z-index: 2; /* Asegura que el texto quede siempre por encima */
+  padding: 0 10px;
+}
+
+.hero-tagline {
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #7E22CE;
+  font-weight: 500;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 500;
+  color: #2D1540;
+  line-height: 1.1;
+  margin: 10px 0;
+}
+
+.ampersand-hero {
+  color: #7E22CE;
+  font-style: italic;
+  font-size: 2.2rem;
+}
+
+.hero-date {
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  color: #6B7280;
+}
+
+/* Contenedores de las imágenes laterales */
+.groom-wrapper,
+.bride-wrapper {
+  flex: 1;
+  max-width: 150px; /* Ajusta según el tamaño de tus PNG */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estado Inicial del Novio (Fuera de pantalla hacia la izquierda) */
+.groom-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0;
+  transform: translateX(-120px) scale(0.9);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(-8px 8px 15px rgba(126, 34, 206, 0.15));
+}
+
+/* Estado Inicial de la Novia (Fuera de pantalla hacia la derecha) */
+.bride-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0;
+  transform: translateX(120px) scale(0.9);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(8px 8px 15px rgba(126, 34, 206, 0.15));
+}
+
+/* ESTADO ACTIVO (Se activa con JS al hacer Scroll) */
+.groom-img.visible,
+.bride-img.visible {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+/* Ajustes Responsive para celulares */
+@media (max-width: 600px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .groom-wrapper, .bride-wrapper {
+    max-width: 120px;
   }
 }

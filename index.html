@@ -33,7 +33,7 @@
 
 <!-- Reemplazamos las letras por tu imagen de monograma -->
 <div class="monogram-container">
-  <img src="assets/monograma.png" alt="Monograma Javier y Erica" class="monogram-img">
+  <img src="assets/monograma.svg" alt="Monograma Javier y Erica" class="monogram-img">
 </div>
 
 <p class="loader-phrase">Tenemos algo que contarte...</p>
@@ -41,7 +41,7 @@
       
 
         <button id="btn-revelar" class="btn-reveal">
-          <span>Ver Invitación</span>
+          <span>!quiero saber!</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="5 3 19 12 5 21 5 3"></polygon>
           </svg>
@@ -52,10 +52,45 @@
 
   </div>
 
-  <!-- PANTALLA PRINCIPAL (HERO) -->
-  <main class="hero-placeholder">
-    <h1 class="hero-title">Javier & Erica</h1>
-    <p class="hero-subtitle">¡Bienvenidos a nuestra boda!</p>
+ <!-- ==========================================
+       PANTALLA 2: INVITACIÓN PRINCIPAL (HERO)
+       ========================================== -->
+  <main class="hero-section">
+    
+    <div class="hero-container">
+      
+      <!-- Contenedor Fila: Novio | Título | Novia -->
+      <div class="hero-layout-grid">
+        
+        <!-- Novio (Entra por la izquierda) -->
+        <div class="groom-wrapper">
+          <img src="assets/javier.png" alt="Javier" class="couple-img groom-img" id="groom-photo">
+        </div>
+
+        <!-- Bloque del Título Central -->
+        <div class="hero-text">
+          <span class="hero-tagline">Nuestra Boda</span>
+          <h1 class="hero-title">Javier <br><span class="ampersand-hero">&</span><br> Erica</h1>
+          <p class="hero-date">12 . 10 . 2026</p>
+        </div>
+
+        <!-- Novia (Entra por la derecha) -->
+        <div class="bride-wrapper">
+          <img src="assets/erica.png" alt="Erica" class="couple-img bride-img" id="bride-photo">
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Indicador de Scroll -->
+    <div class="scroll-indicator" id="scroll-indicator">
+      <span class="scroll-text">Deslizá para descubrir</span>
+      <div class="mouse-icon">
+        <div class="wheel"></div>
+      </div>
+    </div>
+
   </main>
 
   <script src="script.js"></script>
