@@ -7,27 +7,33 @@
   padding: 0;
 }
 
+html, body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden; /* Evita cualquier desplazamiento horizontal involuntario en móviles */
+}
+
 body {
   position: relative;
   font-family: 'Montserrat', sans-serif;
   background-color: #ffffff;
   color: #333333;
-  overflow-x: hidden;
-  background: url(assets/textura-papel.jpg);
+  background-image: url(assets/textura-papel.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
-/* Contorno púrpura integrado visualmente con la textura */
+/* Marco decorativo perimetral */
 body::before {
   content: "";
   position: fixed;
   inset: 18px;
-  border: 5px solid #6809c2;
-  mix-blend-mode: overlay; /* Mezcla el borde con la textura de fondo */
-  opacity: 0.8;
+  border: 6px solid #48028a;
+  mix-blend-mode: darken; /* Mezcla el borde con la textura de fondo */
+  opacity: 0.9;
   pointer-events: none;
-  z-index: -1;
+  z-index: 10;
 }
 
 /* ==========================================
@@ -38,13 +44,22 @@ body::before {
   top: 0;
   left: 0;
   width: 100vw;
+  width: 100dvw;
   height: 100vh;
+  height: 100dvh; /* dvh asegura que en móviles se adapte a las barras del navegador */
   background-color: #0B132B; /* Azul Noche */
   z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 1s ease, visibility 1s ease;
+  padding: 16px;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loader-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 /* Caja contenedora para el SVG y el texto */
@@ -53,7 +68,9 @@ body::before {
   width: 88%;
   max-width: 420px;
   height: 75vh;
+  height: 75dvh;
   max-height: 550px;
+  min-height: 380px; /* Evita que los elementos se encimen en pantallas cortas */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -66,24 +83,21 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* Evita que el SVG bloquee los clics en el botón */
+  pointer-events: none;
+  overflow: visible; /* Asegura que el resplandor drop-shadow no quede recortado */
 }
 
-/* Estilo del rectángulo SVG */
+/* Estilo del rectángulo SVG con efecto glow */
 .border-rect {
-  fill: transparent; /* Fondo transparente dentro del marco */
-  stroke: #6809c2;   /* Color del borde púrpura/violeta */
-  stroke-width: 1.2; /* Grosor de la línea */
-  
-  /* LÓGICA DE DIBUJO: simulamos una línea continua de 2000px */
+  fill: transparent;
+  stroke: #7611d4;
+  stroke-width: 1.2;
   stroke-dasharray: 2000;
   stroke-dashoffset: 2000;
-  
-  /* Ejecuta la animación de dibujado durante 2.5 segundos */
   animation: drawBorder 2.9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.45));
 }
 
-/* Animación CSS que reduce el offset a 0 para revelar la línea entera */
 @keyframes drawBorder {
   to {
     stroke-dashoffset: 0;
@@ -98,9 +112,8 @@ body::before {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 30px;
-  
-  /* Aparece suavemente con un leve retraso mientras se dibuja el marco */
+  padding: 30px 20px;
+  width: 100%;
   opacity: 0;
   animation: fadeInContent 1.2s ease 0.8s forwards;
 }
@@ -111,124 +124,43 @@ body::before {
   }
 }
 
-/* ==========================================
-   NUEVO ESTILO PARA EL MONOGRAMA EN IMAGEN
-   ========================================== */
-
-/* Contenedor del monograma */
+/* Monograma */
 .monogram-container {
-  margin-bottom: 25px;
+  margin-bottom: 22px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Estilo de la imagen del monograma */
 .monogram-img {
-  width: 140px;          /* Ajustá este valor según el alto/ancho de tu diseño */
-  height: auto;          /* Mantiene la proporción original sin deformar */
-  max-width: 80%;        /* Evita que se salga en pantallas chicas */
-  filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.4)); /* Resplandor púrpura tenue */
+  width: clamp(100px, 28vw, 140px);
+  height: auto;
+  max-width: 80%;
+  filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.4));
 }
 
 /* Frase debajo del monograma */
 .loader-phrase {
-  font-size: 0.95rem;
+  font-size: clamp(0.78rem, 2.8vw, 0.95rem);
   font-weight: 300;
   color: #CBD5E1;
-  letter-spacing: 3px;
-  margin-bottom: 35px;
+  letter-spacing: clamp(1.5px, 0.8vw, 3px);
+  margin-bottom: clamp(20px, 4vh, 35px);
   text-transform: uppercase;
+  line-height: 1.4;
+  padding: 0 10px;
 }
 
 /* ==========================================
-   BOTÓN Y TRANSICIÓN
+   BOTÓN CON PULSO Y EFECTO HOVER
    ========================================== */
-.btn-reveal {
-  background-color: rgba(126, 34, 206, 0.15);
-  border: 1px solid #5f12a7;
-  color: #ffffff;
-  padding: 12px 26px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  border-radius: 50px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: all 0.3s ease;
-}
-
-.btn-reveal:hover {
-  background-color: #7E22CE;
-  border-color: #7E22CE;
-  box-shadow: 0 0 18px rgba(168, 85, 247, 0.6);
-  transform: translateY(-2px);
-}
-
-.loader-hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-/* PANTALLA PRINCIPAL (HERO) */
-.hero-placeholder {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
-  background-color: #ffffff;
-}
-
-.hero-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 3.5rem;
-  color: #7E22CE;
-}
-
-.hero-subtitle {
-  margin-top: 10px;
-  color: #666666;
-  letter-spacing: 1px;
-}
-
-/* ==========================================
-   1. EFECTO GLOW EN EL RECTÁNGULO SVG
-   ========================================== */
-.border-rect {
-  fill: transparent;
-  stroke: #7611d4;
-  stroke-width: 1.2;
-  stroke-dasharray: 2000;
-  stroke-dashoffset: 2000;
-  animation: drawBorder 2.9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-
-  /* Resplandor púrpura tenue. Se usa 'filter: drop-shadow' en lugar de 
-     'box-shadow' porque los elementos SVG dibujados requieren filtros de silueta 
-     para contornear el trazo y las esquinas redondeadas correctamente */
-  filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.45));
-}
-
-
-/* ==========================================
-   2. ANIMACIÓN PULSE (LATIDO) EN EL BOTÓN
-   ========================================== */
-
-/* Definición del latido: combina una escala muy sutil con una leve emisión de luz */
 @keyframes pulseBtn {
   0%, 100% {
     transform: scale(1);
     box-shadow: 0 0 0 rgba(168, 85, 247, 0);
   }
   50% {
-    /* Crece apenas un 3% para que sea elegante y no invasivo */
     transform: scale(1.03);
-    /* Destello tenue que acompaña la respiración del botón */
     box-shadow: 0 0 14px rgba(168, 85, 247, 0.4);
   }
 }
@@ -248,13 +180,12 @@ body::before {
   align-items: center;
   gap: 10px;
   transition: all 0.3s ease;
-
-  /* Aplica el latido de forma continua con un ciclo suave de 2.4 segundos */
   animation: pulseBtn 2.4s ease-in-out infinite;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-reveal:hover {
-  /* Detiene el latido al pasar el cursor para que no compita con el efecto hover */
   animation: none;
   background-color: #7E22CE;
   border-color: #7E22CE;
@@ -262,122 +193,319 @@ body::before {
   transform: translateY(-2px);
 }
 
-/* Accesibilidad: desactiva la animación si el usuario tiene activada la reducción de movimiento en su sistema */
-@media (prefers-reduced-motion: reduce) {
-  .btn-reveal {
-    animation: none;
-  }
-}
-
 /* ==========================================
-   HERO CON DISPOSICIÓN LATERAL (TITULO EN EL MEDIO)
+   PANTALLA PRINCIPAL (HERO)
    ========================================== */
 .hero-section {
   position: relative;
-  min-height: 120vh;
-  padding-top: 40px;
+  min-height: 125vh;
+  min-height: 125dvh;
+  padding: 20px 15px 100px 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  overflow-x: clip; /* Previene scroll horizontal sin romper posicionamiento fijo */
 }
 
 .hero-container {
   width: 100%;
-  max-width: 1000px; /* Ancho cómodo para pantallas de celular y desktop */
-  padding: 0 15px;
+  max-width: 1000px;
+  min-height: calc(100vh - 100px);
+  min-height: calc(100dvh - 100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Grilla / Fila Principal */
+/* Grilla / Fila Principal: Novio | Título | Novia */
 .hero-layout-grid {
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
   width: 100%;
-  min-height: 450px;
+  min-height: 480px;
+  gap: 10px;
 }
 
 /* Bloque Central del Título */
 .hero-text {
   text-align: center;
-  z-index: 2; /* Asegura que el texto quede siempre por encima */
+  z-index: 2;
   padding: 0 10px;
+  flex: 1;
+  min-width: 0; /* Permite al flex container encoger el texto sin desbordar */
 }
 
 .hero-tagline {
-  font-size: 0.8rem;
-  letter-spacing: 4px;
+  font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+  letter-spacing: clamp(2px, 1vw, 4px);
   text-transform: uppercase;
   color: #7E22CE;
   font-weight: 500;
+  display: block;
 }
 
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 3rem;
+  font-size: clamp(2rem, 6.5vw, 3.2rem);
   font-weight: 500;
   color: #2D1540;
-  line-height: 1.1;
-  margin: 10px 0;
+  line-height: 1.15;
+  margin: 12px 0;
 }
 
 .ampersand-hero {
   color: #7E22CE;
   font-style: italic;
-  font-size: 2.2rem;
+  font-size: clamp(1.4rem, 4.8vw, 2.2rem);
+  line-height: 1;
+  display: inline-block;
 }
 
 .hero-date {
-  font-size: 0.9rem;
-  letter-spacing: 3px;
+  font-size: clamp(0.75rem, 2.6vw, 0.95rem);
+  letter-spacing: clamp(1.5px, 0.8vw, 3px);
   color: #6B7280;
+  margin-top: 6px;
 }
 
-/* Contenedores de las imágenes laterales */
+/* Contenedores de las fotos laterales */
 .groom-wrapper,
 .bride-wrapper {
-  flex: 1;
-  max-width: 150px; /* Ajusta según el tamaño de tus PNG */
+  flex: 0 0 26%;
+  max-width: 180px;
+  min-width: 75px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Estado Inicial del Novio (Fuera de pantalla hacia la izquierda) */
+/* Estado Inicial del Novio (entra por la izquierda) */
 .groom-img {
   width: 100%;
   height: auto;
   display: block;
   opacity: 0;
-  transform: translateX(-120px) scale(0.9);
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-  filter: drop-shadow(-8px 8px 15px rgba(126, 34, 206, 0.15));
+  transform: translateX(-60px) scale(0.92);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(-6px 6px 12px rgba(126, 34, 206, 0.15));
 }
 
-/* Estado Inicial de la Novia (Fuera de pantalla hacia la derecha) */
+/* Estado Inicial de la Novia (entra por la derecha) */
 .bride-img {
   width: 100%;
   height: auto;
   display: block;
   opacity: 0;
-  transform: translateX(120px) scale(0.9);
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-  filter: drop-shadow(8px 8px 15px rgba(126, 34, 206, 0.15));
+  transform: translateX(60px) scale(0.89);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(6px 6px 12px rgba(126, 34, 206, 0.15));
 }
 
-/* ESTADO ACTIVO (Se activa con JS al hacer Scroll) */
-.groom-img.visible,
+/* Estado Activo al hacer Scroll (se despegan del borde acercándose al centro) */
+.groom-img.visible {
+  opacity: 1;
+  transform: translateX(35px) scale(1);
+}
+
 .bride-img.visible {
   opacity: 1;
-  transform: translateX(0) scale(1);
+  transform: translateX(-35px) scale(1);
 }
 
-/* Ajustes Responsive para celulares */
-@media (max-width: 600px) {
-  .hero-title {
-    font-size: 2.2rem;
+/* ==========================================
+   INDICADOR DE SCROLL
+   ========================================== */
+.scroll-indicator {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+  z-index: 20;
+  animation: floatIndicator 2.2s ease-in-out infinite;
+}
+
+.scroll-indicator.scroll-hidden {
+  opacity: 0;
+  visibility: hidden;
+  animation: none;
+  transform: translate(-50%, 15px); /* Se desliza suavemente hacia abajo al ocultarse */
+}
+
+/* Animación de flotación sutil para invitar a interactuar */
+@keyframes floatIndicator {
+  0%, 100% {
+    transform: translate(-50%, 0);
   }
-  .groom-wrapper, .bride-wrapper {
-    max-width: 120px;
+  50% {
+    transform: translate(-50%, 7px);
+  }
+}
+
+.scroll-text {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #6809c2;
+  font-weight: 600;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+}
+
+.mouse-icon {
+  width: 22px;
+  height: 36px;
+  border: 2px solid #6809c2;
+  border-radius: 14px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 3px 12px rgba(104, 9, 194, 0.2);
+  backdrop-filter: blur(4px);
+}
+
+.mouse-icon .wheel {
+  width: 3.5px;
+  height: 7px;
+  background-color: #6809c2;
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  animation: scrollWheel 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollWheel {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* ==========================================
+   OPTIMIZACIONES Y ADAPTACIÓN PARA MÓVILES
+   ========================================== */
+
+/* Tablets y Celulares estándar */
+@media (max-width: 600px) {
+  body::before {
+    inset: 8px;
+    border-width: 2px;
+  }
+
+  .hero-section {
+    min-height: 120vh;
+    min-height: 120dvh;
+    padding: 20px 8px 80px 8px;
+  }
+
+  .hero-container {
+    min-height: calc(100dvh - 85px);
+  }
+
+  .hero-layout-grid {
+    min-height: 380px;
+    gap: 4px;
+  }
+
+  .groom-wrapper,
+  .bride-wrapper {
+    flex: 0 0 25%;
+    max-width: 100px;
+    min-width: 70px;
+  }
+
+  /* Desplazamiento más corto para pantallas angostas para evitar desborde */
+  .groom-img {
+    transform: translateX(-35px) scale(0.92);
+  }
+
+  .bride-img {
+    transform: translateX(35px) scale(0.92);
+  }
+
+  .hero-text {
+    padding: 0 4px;
+  }
+
+  .scroll-indicator {
+    bottom: 18px;
+  }
+
+  .scroll-text {
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+  }
+}
+
+/* Teléfonos muy pequeños (< 370px, ej. iPhone SE / Galaxy Mini) */
+@media (max-width: 370px) {
+  .groom-wrapper,
+  .bride-wrapper {
+    flex: 0 0 23%;
+    max-width: 80px;
+    min-width: 60px;
+  }
+
+  .hero-title {
+    font-size: 1.7rem;
+  }
+
+  .loader-box {
+    width: 92%;
+    min-height: 350px;
+  }
+}
+
+/* Modo Paisaje en Celulares */
+@media (max-height: 500px) and (orientation: landscape) {
+  .loader-box {
+    height: 92dvh;
+    min-height: auto;
+  }
+
+  .monogram-img {
+    width: 75px;
+  }
+
+  .monogram-container {
+    margin-bottom: 8px;
+  }
+
+  .loader-phrase {
+    margin-bottom: 14px;
+    font-size: 0.72rem;
+  }
+
+  .hero-layout-grid {
+    min-height: 300px;
+  }
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .btn-reveal,
+  .border-rect,
+  .loader-content,
+  .groom-img,
+  .bride-img,
+  .scroll-indicator,
+  .mouse-icon .wheel {
+    animation: none !important;
+    transition: none !important;
   }
 }
