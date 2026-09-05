@@ -198,9 +198,9 @@ body::before {
    ========================================== */
 .hero-section {
   position: relative;
-  min-height: 125vh;
-  min-height: 125dvh;
-  padding: 20px 15px 100px 15px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 20px 15px 60px 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -211,8 +211,8 @@ body::before {
 .hero-container {
   width: 100%;
   max-width: 1000px;
-  min-height: calc(100vh - 100px);
-  min-height: calc(100dvh - 100px);
+  min-height: calc(100vh - 80px);
+  min-height: calc(100dvh - 80px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -372,6 +372,7 @@ body::before {
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.7);
   box-shadow: 0 3px 12px rgba(104, 9, 194, 0.2);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
 }
 
@@ -397,6 +398,360 @@ body::before {
 }
 
 /* ==========================================
+   DIVISOR ELEGANTE
+   ========================================== */
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 85%;
+  max-width: 480px;
+  margin: 50px auto 30px auto;
+  opacity: 0.7;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #7E22CE, transparent);
+}
+
+.divider-icon {
+  color: #7E22CE;
+  font-size: 0.85rem;
+}
+
+/* ==========================================
+   SECCIÓN NUESTRA HISTORIA
+   ========================================== */
+.story-section {
+  position: relative;
+  width: 100%;
+  padding: 30px 20px 100px 20px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.story-container {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+/* Contenido textual */
+.story-content {
+  flex: 1.2;
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.story-tagline {
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #7E22CE;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.story-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 5vw, 3.2rem);
+  color: #2D1540;
+  font-weight: 500;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.story-paragraph {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #444444;
+  margin-bottom: 16px;
+  font-weight: 300;
+}
+
+.story-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: #6809c2;
+  margin-top: 25px;
+  padding-left: 18px;
+  border-left: 2px solid #7E22CE;
+  line-height: 1.4;
+}
+
+/* Columna imagen */
+.story-media {
+  flex: 0.9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.story-img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  display: block;
+  opacity: 0;
+  transform: translateX(50px) scale(0.94);
+  transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s, transform 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+  filter: drop-shadow(0 12px 25px rgba(104, 9, 194, 0.18));
+}
+
+/* Estado activo disparado por Scroll */
+.story-section.visible .story-content {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.story-section.visible .story-img {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+/* ==========================================
+   SECCIÓN: EVENTO Y CONTADOR
+   ========================================== */
+.event-section {
+  position: relative;
+  width: 100%;
+  padding: 30px 20px 120px 20px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.event-container {
+  width: 100%;
+  max-width: 950px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+/* 1. Bloque del Contador */
+.countdown-wrapper {
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  padding: 40px 30px;
+  background-color: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(126, 34, 206, 0.25);
+  border-radius: 24px;
+  box-shadow: 0 10px 35px rgba(104, 9, 194, 0.08);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-tagline {
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #7E22CE;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 5vw, 2.8rem);
+  color: #2D1540;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+
+/* Grilla del Contador */
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 75px;
+  padding: 12px 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(126, 34, 206, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(104, 9, 194, 0.06);
+}
+
+.countdown-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 5vw, 2.8rem);
+  font-weight: 600;
+  color: #2D1540;
+  line-height: 1;
+}
+
+.countdown-label {
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #7E22CE;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.countdown-colon {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  color: #7E22CE;
+  font-weight: 600;
+  line-height: 1;
+  margin-top: -12px;
+}
+
+/* Botón Agendar Calendario */
+.btn-calendar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #6809c2;
+  background-color: rgba(126, 34, 206, 0.08);
+  border: 1px solid rgba(126, 34, 206, 0.3);
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-calendar:hover {
+  background-color: #7E22CE;
+  color: #ffffff;
+  border-color: #7E22CE;
+  box-shadow: 0 4px 15px rgba(126, 34, 206, 0.3);
+  transform: translateY(-2px);
+}
+
+/* 2. Tarjetas del Evento */
+.event-cards-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  justify-content: center;
+}
+
+.event-card {
+  background-color: rgba(255, 255, 255, 0.45);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(126, 34, 206, 0.2);
+  border-radius: 20px;
+  padding: 35px 25px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(104, 9, 194, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.event-cards-grid .event-card:nth-child(2) {
+  transition-delay: 0.15s;
+}
+
+.event-card-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(126, 34, 206, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.event-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  color: #2D1540;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.event-card-time {
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #7E22CE;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.event-card-place {
+  font-size: 1.05rem;
+  color: #333333;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.event-card-address {
+  font-size: 0.85rem;
+  color: #666666;
+  margin-bottom: 22px;
+  font-weight: 300;
+}
+
+.btn-map {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: #6809c2;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-top: auto;
+}
+
+.btn-map:hover {
+  background-color: #7E22CE;
+  box-shadow: 0 4px 16px rgba(126, 34, 206, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Estado activo al scroll */
+.event-section.visible .countdown-wrapper,
+.event-section.visible .event-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================
    OPTIMIZACIONES Y ADAPTACIÓN PARA MÓVILES
    ========================================== */
 
@@ -408,9 +763,9 @@ body::before {
   }
 
   .hero-section {
-    min-height: 120vh;
-    min-height: 120dvh;
-    padding: 20px 8px 80px 8px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 20px 8px 50px 8px;
   }
 
   .hero-container {
@@ -438,6 +793,15 @@ body::before {
     transform: translateX(35px) scale(0.92);
   }
 
+  /* En móviles, se despegan sutilmente del borde hacia el centro al hacer scroll */
+  .groom-img.visible {
+    transform: translateX(14px) scale(1);
+  }
+
+  .bride-img.visible {
+    transform: translateX(-14px) scale(1);
+  }
+
   .hero-text {
     padding: 0 4px;
   }
@@ -449,6 +813,70 @@ body::before {
   .scroll-text {
     font-size: 0.65rem;
     letter-spacing: 1.5px;
+  }
+
+  /* Adaptación de la historia en móviles */
+  .story-container {
+    flex-direction: column-reverse;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .story-content {
+    transform: translateY(30px);
+  }
+
+  .story-img {
+    max-width: 220px;
+    transform: translateY(30px) scale(0.95);
+  }
+
+  .story-section.visible .story-content,
+  .story-section.visible .story-img {
+    transform: translateY(0) scale(1);
+  }
+
+  .story-quote {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid rgba(126, 34, 206, 0.3);
+    padding-top: 15px;
+    margin-top: 20px;
+  }
+
+  /* Adaptación de contador y tarjetas en móviles */
+  .countdown-wrapper {
+    padding: 28px 14px;
+    border-radius: 20px;
+  }
+
+  .countdown-grid {
+    gap: 6px;
+    margin-bottom: 22px;
+  }
+
+  .countdown-item {
+    min-width: 58px;
+    padding: 8px 4px;
+    border-radius: 12px;
+  }
+
+  .countdown-number {
+    font-size: 1.8rem;
+  }
+
+  .countdown-colon {
+    font-size: 1.4rem;
+    margin-top: -6px;
+  }
+
+  .event-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .event-card {
+    padding: 28px 20px;
   }
 }
 
@@ -469,13 +897,22 @@ body::before {
     width: 92%;
     min-height: 350px;
   }
+
+  .countdown-item {
+    min-width: 50px;
+    padding: 6px 2px;
+  }
+
+  .countdown-number {
+    font-size: 1.5rem;
+  }
 }
 
 /* Modo Paisaje en Celulares */
 @media (max-height: 500px) and (orientation: landscape) {
   .loader-box {
     height: 92dvh;
-    min-height: auto;
+    min-height: 0;
   }
 
   .monogram-img {
@@ -504,6 +941,10 @@ body::before {
   .groom-img,
   .bride-img,
   .scroll-indicator,
+  .story-content,
+  .story-img,
+  .countdown-wrapper,
+  .event-card,
   .mouse-icon .wheel {
     animation: none !important;
     transition: none !important;
