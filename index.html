@@ -219,6 +219,121 @@
     </div>
   </section>
 
+  <!-- DIVISOR ELEGANTE -->
+  <div class="section-divider">
+    <span class="divider-line"></span>
+    <span class="divider-icon">✦</span>
+    <span class="divider-line"></span>
+  </div>
+
+  <!-- SECCIÓN: CONFIRMACIÓN (R.S.V.P.) -->
+  <section class="rsvp-section" id="confirmacion">
+    <div class="rsvp-container">
+      
+      <!-- Foto de espaldas -->
+      <div class="rsvp-media">
+        <img src="assets/deespalda.png" alt="Javier y Erica de espaldas" class="rsvp-img" id="rsvp-photo">
+      </div>
+
+      <!-- Texto y Llamado a la Acción -->
+      <div class="rsvp-content">
+        <span class="section-tagline">R. S. V. P.</span>
+        <h2 class="section-title">¿Nos acompañás?</h2>
+        <p class="rsvp-phrase">
+          Ahora que sabés que nos casamos, el día y el lugar, falta algo muy importante para nosotros: <strong>¿contamos con tu presencia?</strong>
+        </p>
+        <p class="rsvp-deadline">Por favor, confirmanos antes del 15 de Septiembre de 2026.</p>
+        
+        <button class="btn-rsvp-open" id="btn-open-rsvp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <span>Confirmar Asistencia</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODAL DE CONFIRMACIÓN -->
+  <div class="rsvp-modal-overlay" id="rsvp-modal">
+    <div class="rsvp-modal-card">
+      <button class="modal-close-btn" id="btn-close-rsvp" aria-label="Cerrar modal">&times;</button>
+      
+      <div class="modal-header">
+        <span class="section-tagline">Confirmación</span>
+        <h3 class="modal-title">Tu Asistencia</h3>
+        <p class="modal-desc">Completá tus datos para que podamos organizar la fiesta de la mejor manera:</p>
+      </div>
+
+      <form id="rsvp-form" class="rsvp-form">
+        <!-- Nombre -->
+        <div class="form-group">
+          <label for="rsvp-name">Nombre y Apellido</label>
+          <input type="text" id="rsvp-name" required placeholder="Ej: Lucas Benítez">
+        </div>
+
+        <!-- Asistencia -->
+        <div class="form-group">
+          <label for="rsvp-attendance">¿Asistirás a la boda?</label>
+          <select id="rsvp-attendance" required>
+            <option value="¡Sí, confirmo con mucho gusto!">¡Sí, confirmo con mucho gusto!</option>
+            <option value="Lamentablemente no podré ir">Lamentablemente no podré ir</option>
+          </select>
+        </div>
+
+        <!-- Cantidad de personas -->
+        <div class="form-group" id="group-guests">
+          <label for="rsvp-guests">¿Cuántas personas vienen?</label>
+          <select id="rsvp-guests">
+            <option value="1 persona">Solo yo (1 persona)</option>
+            <option value="2 personas">2 personas</option>
+            <option value="3 personas">3 personas</option>
+            <option value="4 personas">4 personas</option>
+            <option value="5 o más personas">5 o más personas</option>
+          </select>
+        </div>
+
+        <!-- Cuidados alimenticios -->
+        <div class="form-group" id="group-diet">
+          <label for="rsvp-diet">¿Algún cuidado alimenticio?</label>
+          <select id="rsvp-diet">
+            <option value="Menú Clásico (sin restricciones)">Menú Clásico (sin restricciones)</option>
+            <option value="Vegetariano">Vegetariano</option>
+            <option value="Vegano">Vegano</option>
+            <option value="Celíaco (Sin TACC)">Celíaco (Sin TACC)</option>
+            <option value="Diabético / Hipertenso">Diabético / Hipertenso</option>
+            <option value="Alergia específica">Alergia específica</option>
+          </select>
+        </div>
+
+        <!-- Mensaje o dedicatoria -->
+        <div class="form-group">
+          <label for="rsvp-message">Mensaje para los novios (opcional)</label>
+          <input type="text" id="rsvp-message" placeholder="Un deseo, canción que querés escuchar...">
+        </div>
+
+        <!-- Botón enviar a WhatsApp -->
+        <button type="submit" class="btn-rsvp-send">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+          </svg>
+          <span>Enviar Confirmación por WhatsApp</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER / CIERRE -->
+  <footer class="wedding-footer">
+    <div class="footer-monogram">
+      <img src="assets/monograma.svg" alt="Monograma Javier y Erica" class="footer-monogram-img">
+    </div>
+    <h3 class="footer-names">Javier & Erica</h3>
+    <p class="footer-phrase">¡Gracias por ser parte de nuestra historia!</p>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
